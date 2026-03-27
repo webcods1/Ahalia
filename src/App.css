@@ -1,0 +1,59 @@
+@import './components/Navbar.css';
+@import './components/Banner.css';
+@import './components/ProductGrid.css';
+@import './components/Footer.css';
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+
+.about-brand {
+  padding: 6rem 5%;
+  background-color: var(--code-bg);
+  text-align: center;
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-text {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 2.5rem;
+}
+
+.read-more-btn {
+  padding: 14px 40px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(107, 15, 26, 0.2);
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.read-more-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(107, 15, 26, 0.3);
+  filter: brightness(1.2);
+}
+
+@media (max-width: 768px) {
+  .about-brand {
+    padding: 4rem 1.5rem;
+  }
+}
