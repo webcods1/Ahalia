@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Navbar.css';
-import { View } from '../App';
+import type { View } from '../types';
 
 interface NavbarProps {
   wishlistCount?: number;

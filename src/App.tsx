@@ -8,12 +8,7 @@ import WishlistPage from './components/WishlistPage';
 import BagPage from './components/BagPage';
 import ProductDetailPage from './components/ProductDetailPage';
 
-export type View = 'home' | 'wishlist' | 'bag' | 'product-detail';
-
-export interface CartItem {
-  id: number;
-  quantity: number;
-}
+import type { View, CartItem } from './types';
 
 function App() {
   const [wishlist, setWishlist] = useState<number[]>([]);
