@@ -3,7 +3,8 @@ import './Banner.css';
 
 const banners = [
   '/banner1.png',
-  '/banner4.png',
+  '/banner2.png',
+  '/banner3.png',
 ];
 
 export default function Banner() {
@@ -18,8 +19,8 @@ export default function Banner() {
 
   return (
     <section className="banner-container" aria-label="Promotional Banners">
-      <div 
-        className="banner-track" 
+      <div
+        className="banner-track"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {banners.map((src, index) => (
@@ -28,7 +29,7 @@ export default function Banner() {
           </div>
         ))}
       </div>
-      
+
       <div className="banner-controls">
         {banners.map((_, index) => (
           <button
