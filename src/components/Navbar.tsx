@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import './Navbar.css';
+import { View } from '../App';
 
 interface NavbarProps {
   wishlistCount?: number;
   bagCount?: number;
-  onNavigate: (view: 'home' | 'wishlist' | 'bag') => void;
-  currentView: 'home' | 'wishlist' | 'bag';
+  onNavigate: (view: View) => void;
+  currentView: View;
 }
 
 export default function Navbar({ wishlistCount = 0, bagCount = 0, onNavigate, currentView }: NavbarProps) {
@@ -13,7 +14,7 @@ export default function Navbar({ wishlistCount = 0, bagCount = 0, onNavigate, cu
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const handleNavClick = (view: 'home' | 'wishlist' | 'bag', e: React.MouseEvent) => {
+  const handleNavClick = (view: View, e: React.MouseEvent) => {
     e.preventDefault();
     onNavigate(view);
     setIsMenuOpen(false);
