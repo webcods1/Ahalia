@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
-import Banner from './components/Banner';
+import HeroScroll from './components/HeroScroll';
 import ProductGrid from './components/ProductGrid';
 import Footer from './components/Footer';
 import WishlistPage from './components/WishlistPage';
@@ -69,7 +69,7 @@ function App() {
       
       {view === 'home' && (
         <>
-          <Banner />
+          <HeroScroll />
           <main className="content">
             <ProductGrid 
               wishlist={wishlist} 
