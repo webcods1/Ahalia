@@ -56,32 +56,58 @@
   justify-content: flex-end;
 }
 
-.navbar-icon-link {
+.navbar-icon-btn {
   text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
   color: #4a4552;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon-only, .wishlist-link {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #4a4552;
   transition: all 0.3s ease;
-  min-width: 30px;
-  min-height: 30px;
 }
 
-.icon-only svg, .cart-link svg {
+.icon-only svg, .cart-link svg, .wishlist-link svg {
   display: block;
-  stroke: #4a4552 !important;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  stroke: #4a4552; /* Ensure stroke color is dark */
 }
 
-.navbar-icon-link:hover {
+.navbar-icon-btn:hover {
   color: var(--accent);
   transform: scale(1.1);
 }
 
-.navbar-icon-link:hover svg {
-  stroke: var(--accent) !important;
+.navbar-icon-btn:hover svg {
+  stroke: var(--accent);
+}
+
+.navbar-icon-btn.active-icon {
+  color: var(--accent);
+}
+
+.navbar-icon-btn.active-icon svg {
+  stroke: var(--accent);
+  fill: #fff5f6;
+}
+
+.active-nav {
+  color: var(--accent) !important;
+}
+
+.active-nav::after {
+  width: 100% !important;
 }
 
 .cart-link {
