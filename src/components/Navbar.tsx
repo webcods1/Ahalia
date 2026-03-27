@@ -8,7 +8,7 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      {/* Mobile Toggle Button */}
+      {/* 1. Mobile Toggle (Hidden-ish on desktop) */}
       <button 
         className={`mobile-menu-toggle ${isMenuOpen ? 'active' : ''}`} 
         onClick={toggleMenu}
@@ -19,12 +19,21 @@ export default function Navbar() {
         <span className="bar"></span>
       </button>
 
-      {/* Logo */}
+      {/* 2. Logo */}
       <a href="/" className="navbar-logo">
         <img src="/logo.png" alt="Ahalia Logo" />
       </a>
       
-      {/* Right Side Actions */}
+      {/* 3. Desktop Navigation Links */}
+      <ul className={`navbar-links ${isMenuOpen ? 'mobile-open' : ''}`}>
+        <li><a href="#home" onClick={() => setIsMenuOpen(false)}>Home</a></li>
+        <li><a href="#new-arrivals" onClick={() => setIsMenuOpen(false)}>New Arrivals</a></li>
+        <li><a href="#offer" onClick={() => setIsMenuOpen(false)}>Offer</a></li>
+        <li><a href="#about" onClick={() => setIsMenuOpen(false)}>About</a></li>
+        <li><a href="#contacts" onClick={() => setIsMenuOpen(false)}>Contacts</a></li>
+      </ul>
+
+      {/* 4. Action Icons (Wishlist, Cart) - Always on right for desktop */}
       <div className="navbar-actions">
         <a href="#wishlist" className="navbar-icon-link icon-only" aria-label="Wishlist" title="Wishlist">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -40,15 +49,6 @@ export default function Navbar() {
           <span className="cart-count">0</span>
         </a>
       </div>
-
-      {/* Navigation Links - Moved after actions to prevent grid layout issues */}
-      <ul className={`navbar-links ${isMenuOpen ? 'mobile-open' : ''}`}>
-        <li><a href="#home" onClick={() => setIsMenuOpen(false)}>Home</a></li>
-        <li><a href="#new-arrivals" onClick={() => setIsMenuOpen(false)}>New Arrivals</a></li>
-        <li><a href="#offer" onClick={() => setIsMenuOpen(false)}>Offer</a></li>
-        <li><a href="#about" onClick={() => setIsMenuOpen(false)}>About</a></li>
-        <li><a href="#contacts" onClick={() => setIsMenuOpen(false)}>Contacts</a></li>
-      </ul>
     </nav>
   );
 }
