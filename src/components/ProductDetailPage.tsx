@@ -36,6 +36,17 @@ const PRODUCTS: Product[] = [
     description: "A versatile dress that blends comfort with high fashion. Perfect for evening soirées or formal office gatherings. Includes comprehensive front, side, and detail views.",
     sizes: ["XS", "S", "M", "L"]
   },
+  { 
+    id: 3, 
+    name: "Ahalia Boutique Collection", 
+    price: "₹10,999", 
+    images: ["/dress8.png", "/dress9.png", "/dress7.png"], 
+    category: "Exclusive Set",
+    color: "Multi-Color Collection",
+    material: "Luxury Fabric Mix",
+    description: "The ultimate Ahalia experience. This exclusive set features our top three signature pieces: The Midnight Velvet, Summer Breeze, and Golden Hour dresses. Perfect for building a complete premium wardrobe.",
+    sizes: ["S", "M", "L"]
+  },
 ];
 
 interface ProductDetailPageProps {

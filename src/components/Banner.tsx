@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import './Banner.css';
 
 const banners = [
@@ -36,54 +36,61 @@ export default function Banner() {
   return (
     <section className="banner-container">
       <div className="banner-slide-wrapper">
-        <AnimatePresence mode="popLayout">
+        {banners.map((banner, index) => (
           <motion.div
-            key={currentIndex}
+            key={index}
             className="banner-slide"
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0 }}
+            animate={{ 
+              opacity: index === currentIndex ? 1 : 0,
+              zIndex: index === currentIndex ? 10 : 1
+            }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            style={{ 
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              pointerEvents: index === currentIndex ? 'auto' : 'none',
+              visibility: index === currentIndex ? 'visible' : 'hidden'
+            }}
           >
             <img 
-              src={banners[currentIndex].image} 
-              alt={banners[currentIndex].title} 
+              src={banner.image} 
+              alt={banner.title} 
               className="banner-image" 
-              fetchPriority="high"
+              fetchPriority={index === 0 ? "high" : "auto"}
               loading="eager"
               decoding="sync"
             />
             <div className="banner-content-overlay">
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ 
+                  opacity: index === currentIndex ? 1 : 0, 
+                  scale: index === currentIndex ? 1 : 0.9 
+                }}
+                transition={{ 
+                  delay: index === currentIndex ? 0.4 : 0, 
+                  duration: 0.8, 
+                  ease: "easeOut" 
+                }}
                 className="banner-text-box"
               >
-                <motion.h2 className="banner-title">
-                  {banners[currentIndex].title}
-                </motion.h2>
-                <motion.p className="banner-subtitle">
-                  {banners[currentIndex].subtitle}
-                </motion.p>
                 <motion.button 
-                  className="banner-cta"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="banner-explore-btn"
+                  whileTap={{ scale: 0.97 }}
                 >
-                  {banners[currentIndex].cta}
+                  <svg className="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path>
+                  </svg>
+                  Explore
                 </motion.button>
               </motion.div>
             </div>
           </motion.div>
-        </AnimatePresence>
-
-        {/* Hidden pre-render for subsequent images to ensure they show immediately when switching */}
-        <div style={{ display: 'none', visibility: 'hidden', position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>
-          {banners.map((banner, i) => (
-            <img key={i} src={banner.image} aria-hidden="true" loading="eager" />
-          ))}
-        </div>
+        ))}
       </div>
 
       <div className="banner-controls">
@@ -94,12 +101,18 @@ export default function Banner() {
             onClick={() => setCurrentIndex(index)}
             aria-label={`Go to slide ${index + 1}`}
           >
-            {index === currentIndex && (
-              <motion.div 
-                className="dot-fill"
-                layoutId="activeDot"
-                transition={{ type: "spring", stiffness: 380, damping: 30 }}
-              />
+            {index === currentIndex ? (
+              <div className="dot-progress-bg">
+                <motion.div 
+                  className="dot-progress-fill"
+                  initial={{ width: 0 }}
+                  animate={{ width: '100%' }}
+                  key={currentIndex}
+                  transition={{ duration: 6, ease: "linear" }}
+                />
+              </div>
+            ) : (
+              <div className="dot-inactive" />
             )}
           </button>
         ))}

@@ -12,6 +12,7 @@ interface Product {
 const PRODUCTS: Product[] = [
   { id: 1, name: "Classic Party Gown", price: "₹4,599", images: ["/dress3.png", "/dress2.png"], category: "New Arrival" },
   { id: 2, name: "Premium Maroon Dress", price: "₹2,499", images: ["/dress1.png", "/dress5.png", "/dress6.png"], category: "Best Seller" },
+  { id: 3, name: "Ahalia Boutique Collection", price: "₹10,999", images: ["/dress8.png", "/dress9.png", "/dress7.png"], category: "Exclusive Set" },
 ];
 
 interface ProductGridProps {
