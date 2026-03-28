@@ -1,4 +1,4 @@
-import { useScroll, useTransform, motion, useMotionValueEvent } from 'framer-motion';
+import { useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import './HeroScroll.css';
 
@@ -8,7 +8,6 @@ export default function HeroScroll() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
-  const [loadedCount, setLoadedCount] = useState(0);
 
   // Scroll logic
   const { scrollYProgress } = useScroll({
@@ -22,16 +21,11 @@ export default function HeroScroll() {
   // Preload images
   useEffect(() => {
     const loadedImages: HTMLImageElement[] = [];
-    let count = 0;
 
     for (let i = 1; i <= FRAME_COUNT; i++) {
       const img = new Image();
       const frameStr = i.toString().padStart(3, '0');
       img.src = `/banner/ezgif-frame-${frameStr}.png`;
-      img.onload = () => {
-        count++;
-        setLoadedCount(count);
-      };
       loadedImages.push(img);
     }
     setImages(loadedImages);
@@ -117,21 +111,15 @@ export default function HeroScroll() {
   }, [images]);
 
   return (
-    <div className="hero-scroll-container" ref={containerRef}>
-      <div className="sticky-canvas-wrapper">
-        <motion.canvas 
+    <div className="hero-scroll-container" ref={containerRef} style={{ position: 'relative' }}>
+      <div className="sticky-canvas-wrapper" style={{ position: 'sticky', top: 0, width: '100%', height: '100vh', overflow: 'hidden' }}>
+        <canvas 
           ref={canvasRef} 
           className="hero-canvas" 
-          style={{ width: '100%', height: '100%' }}
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
         />
         <div className="canvas-overlay" />
         
-        {loadedCount < FRAME_COUNT && (
-          <div className="loading-indicator">
-            <div className="loader-ring"></div>
-            <span>Loading Experience {Math.round((loadedCount / FRAME_COUNT) * 100)}%</span>
-          </div>
-        )}
       </div>
     </div>
   );

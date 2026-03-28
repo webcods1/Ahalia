@@ -69,7 +69,9 @@ function App() {
       
       {view === 'home' && (
         <>
+        <div className="hero-scroll-wrapper" style={{ position: 'relative' }}>
           <HeroScroll />
+        </div>
           <main className="content">
             <ProductGrid 
               wishlist={wishlist} 
