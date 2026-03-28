@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import './App.css';
 import Navbar from './components/Navbar';
-import HeroScroll from './components/HeroScroll';
+import Banner from './components/Banner';
 import ProductGrid from './components/ProductGrid';
 import Footer from './components/Footer';
 import WishlistPage from './components/WishlistPage';
@@ -69,9 +70,7 @@ function App() {
       
       {view === 'home' && (
         <>
-        <div className="hero-scroll-wrapper" style={{ position: 'relative' }}>
-          <HeroScroll />
-        </div>
+          <Banner />
           <main className="content">
             <ProductGrid 
               wishlist={wishlist} 
@@ -80,18 +79,46 @@ function App() {
               onProductClick={(id) => navigateTo('product-detail', id)}
             />
             
-            <section className="about-brand">
+            <motion.section 
+              className="about-brand"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+            >
               <div className="about-content">
-                <h2 className="section-title">The Ahalia Legacy</h2>
-                <p className="about-text">
+                <motion.h2 
+                  className="section-title"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2, duration: 0.8 }}
+                >
+                  The Ahalia Legacy
+                </motion.h2>
+                <motion.p 
+                  className="about-text"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
+                >
                   Crafting elegance since our inception. We specialize in premium dresses that 
                   personify sophistication and contemporary style. Our collections are 
                   meticulously designed with top-tier fabrics to provide an unmatched 
                   wearing experience.
-                </p>
-                <button className="read-more-btn">Our Story</button>
+                </motion.p>
+                <motion.button 
+                  className="read-more-btn"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                >
+                  Our Story
+                </motion.button>
               </div>
-            </section>
+            </motion.section>
           </main>
         </>
       )}

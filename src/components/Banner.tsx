@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import './Banner.css';
 
 const banners = [
@@ -18,16 +19,24 @@ export default function Banner() {
   }, []);
 
   return (
-    <section className="banner-container" aria-label="Promotional Banners">
-      <div
-        className="banner-track"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-      >
-        {banners.map((src, index) => (
-          <div className="banner-slide" key={index}>
-            <img src={src} alt={`Fashion Banner ${index + 1}`} className="banner-image" />
-          </div>
-        ))}
+    <section className="banner-container">
+      <div className="banner-slide-wrapper">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            className="banner-slide"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <img 
+              src={banners[currentIndex]} 
+              alt={`Ahalia Collection ${currentIndex + 1}`} 
+              className="banner-image" 
+            />
+          </motion.div>
+        </AnimatePresence>
       </div>
 
       <div className="banner-controls">
@@ -37,7 +46,15 @@ export default function Banner() {
             className={`banner-dot ${index === currentIndex ? 'active' : ''}`}
             onClick={() => setCurrentIndex(index)}
             aria-label={`Go to slide ${index + 1}`}
-          />
+          >
+            {index === currentIndex && (
+              <motion.div 
+                className="dot-fill"
+                layoutId="activeDot"
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              />
+            )}
+          </button>
         ))}
       </div>
     </section>

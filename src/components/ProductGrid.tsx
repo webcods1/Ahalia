@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import './ProductGrid.css';
 
 interface Product {
@@ -23,16 +24,50 @@ interface ProductGridProps {
 export default function ProductGrid({ wishlist, onToggleWishlist, onAddToBag, onProductClick }: ProductGridProps) {
   return (
     <section className="product-section">
-      <div className="section-header">
+      <motion.div 
+        className="section-header"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <h2 className="section-title">Ahalia Collections</h2>
         <p className="section-subtitle">Discover our premium range of contemporary dresses</p>
-      </div>
-      <div className="product-grid">
+      </motion.div>
+      <motion.div 
+        className="product-grid"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.15
+            }
+          }
+        }}
+      >
         {PRODUCTS.map(product => {
           const isWishlisted = wishlist.includes(product.id);
           
           return (
-            <div key={product.id} className="product-card" onClick={() => onProductClick(product.id)}>
+            <motion.div 
+              key={product.id} 
+              className="product-card" 
+              onClick={() => onProductClick(product.id)}
+              variants={{
+                hidden: { opacity: 0, y: 40, scale: 0.95 },
+                visible: { 
+                  opacity: 1, 
+                  y: 0, 
+                  scale: 1,
+                  transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+                }
+              }}
+              whileHover={{ y: -10 }}
+            >
               <div className="product-image-wrapper">
                 <img src={product.images[0]} alt={product.name} className="product-image primary" />
                 {product.images.length > 1 && (
@@ -68,10 +103,10 @@ export default function ProductGrid({ wishlist, onToggleWishlist, onAddToBag, on
                   Add to Bag
                 </button>
               </div>
-            </div>
+            </motion.div>
           );
         })}
-      </div>
+      </motion.div>
     </section>
   );
 }
