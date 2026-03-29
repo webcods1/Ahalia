@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Navbar.css';
 import type { View } from '../types';
 
@@ -12,6 +12,17 @@ interface NavbarProps {
 export default function Navbar({ wishlistCount = 0, bagCount = 0, onNavigate, currentView }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isMenuOpen]);
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleNavClick = (view: View, e: React.MouseEvent) => {
@@ -21,7 +32,7 @@ export default function Navbar({ wishlistCount = 0, bagCount = 0, onNavigate, cu
   };
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${isMenuOpen ? 'navbar-active' : ''}`}>
       {/* 1. Mobile Toggle */}
       <button 
         className={`mobile-menu-toggle ${isMenuOpen ? 'active' : ''}`} 

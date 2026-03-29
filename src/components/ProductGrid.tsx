@@ -32,7 +32,7 @@ export default function ProductGrid({ wishlist, onToggleWishlist, onAddToBag, on
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <h2 className="section-title">Ahalia Collections</h2>
+        <h2 className="section-title">Exclusive Collection</h2>
         <p className="section-subtitle">Discover our premium range of contemporary dresses</p>
       </motion.div>
       <motion.div 

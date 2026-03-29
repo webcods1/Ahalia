@@ -1,5 +1,5 @@
 .product-detail-page {
-  padding: 3rem 10%;
+  padding: 8rem 10% 4rem;
   background-color: #fcfbf7;
   min-height: 90vh;
 }
@@ -227,7 +227,7 @@
 }
 
 @media (max-width: 991px) {
-  .product-detail-page { padding: 3rem 5%; }
+  .product-detail-page { padding: 5.5rem 5% 3rem; }
   .product-detail-container { grid-template-columns: 1fr; gap: 3rem; }
   .detail-name { font-size: 2rem; }
 }
